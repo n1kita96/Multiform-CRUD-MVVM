@@ -1,0 +1,52 @@
+﻿<!--AUTHOR:
+    Mykyta Shvets
+    -->
+<Window x:Class="Multiform.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Multiform"
+        mc:Ignorable="d"
+        Title="Employees" Height="500" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Name="LblTitle" Grid.ColumnSpan="3" Content="Personnel Database" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+        <DataGrid Name="GridEmployees" AlternationCount="2" AlternatingRowBackground="#DCDCDC" CanUserAddRows="False" Grid.Row="1" Margin="10" AutoGenerateColumns="False" Grid.ColumnSpan="3" ItemsSource="{Binding Employees}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Position" Binding="{Binding Position}" Width="*"/>
+                <DataGridTextColumn Header="Hourly Pay Rate" Binding="{Binding HourlyPayRate}" />
+                <DataGridTextColumn Header="Changed" Binding="{Binding IsChanged}" />
+                <DataGridTextColumn Header="Deleted" Binding="{Binding IsDeleted}" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button   Click="BtnEdit_Click" Padding="3" Margin="5" BorderThickness="1">Edit</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button  Click="BtnDelete_Click" Padding="3" Margin="5" BorderThickness="1">Delete</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Name="BtnAdd" Content="Add new employee" Grid.Row="2" Margin="5" Click="BtnAdd_Click"/>
+        <Button Name="BtnSave" Content="Save All" Grid.Row="2" Grid.Column="1" Margin="5" Click="BtnSave_Click"/>
+        <Button Name="BtnRollback" Content="Rollback" Grid.Row="2" Grid.Column="2" Margin="5" Click="BtnRollback_Click"/>
+    </Grid>
+</Window>
